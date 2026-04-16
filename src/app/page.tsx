@@ -2,12 +2,16 @@ import HeroContent from "@/components/HeroContent";
 import Navbar from "@/components/Navbar";
 import MeshBackground from "@/components/MeshBackground";
 import Spotlight from "@/components/Spotlight";
+import FloatingFragments from "@/components/FloatingFragments";
 
 export default function Home() {
   return (
     <main className="grain relative min-h-screen overflow-hidden bg-[#020a08]">
       {/* Mesh gradient */}
       <MeshBackground />
+
+      {/* Floating regulatory fragments */}
+      <FloatingFragments />
 
       {/* Grid overlay — subtle structure */}
       <div
