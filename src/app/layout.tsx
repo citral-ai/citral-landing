@@ -30,12 +30,30 @@ export const metadata: Metadata = {
     ],
     apple: "/icon-192.png",
   },
+  metadataBase: new URL("https://citral.ai"),
   openGraph: {
     title: "Citral AI — We Catch What Humans Miss",
     description:
       "AI-powered compliance auditing for pharmaceutical batch manufacturing records.",
     type: "website",
     url: "https://citral.ai",
+    siteName: "Citral AI",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Citral AI — We Catch What Humans Miss",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Citral AI — We Catch What Humans Miss",
+    description:
+      "AI-powered compliance auditing for pharmaceutical batch manufacturing records.",
+    images: ["/og-image.png"],
+    creator: "@citralai",
   },
 };
 
