@@ -8,9 +8,22 @@
   --font-serif: var(--font-instrument-serif);
 }
 
-html, body {
-  overflow: hidden;
-  height: 100%;
+html {
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+}
+[id] {
+  scroll-margin-top: 80px;
+}
+html::-webkit-scrollbar {
+  display: none;
+}
+body {
+  overflow-x: hidden;
+  min-height: 100vh;
+  min-height: 100dvh;
 }
 
 ::selection {
@@ -64,17 +77,6 @@ html, body {
   text-shadow: 0 0 12px rgba(0, 194, 168, 0.5);
 }
 
-/* Scan beam */
-@keyframes scan-beam {
-  0% { transform: translateY(-20px); opacity: 0; }
-  10% { opacity: 1; }
-  90% { opacity: 1; }
-  100% { transform: translateY(280px); opacity: 0; }
-}
-.scan-beam {
-  animation: scan-beam 4.5s linear infinite;
-}
-
 /* Float fragment */
 @keyframes float-fragment {
   0% { transform: translateY(20px); opacity: 0; }
@@ -90,6 +92,94 @@ html, body {
 }
 .mesh-breathe {
   animation: mesh-breathe 18s ease-in-out infinite;
+}
+
+/* Raycast-style terminal glow orbs */
+@keyframes glow-drift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(30px, -20px) scale(1.1); }
+  50% { transform: translate(-20px, 30px) scale(0.95); }
+  75% { transform: translate(20px, 10px) scale(1.05); }
+}
+
+@keyframes glow-drift-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-40px, 20px) scale(1.15); }
+  66% { transform: translate(30px, -30px) scale(0.9); }
+}
+
+.terminal-glow-orb {
+  animation: glow-drift 8s ease-in-out infinite;
+}
+
+.terminal-glow-orb-2 {
+  animation: glow-drift-2 10s ease-in-out infinite;
+}
+
+/* Raycast-style rotating border glow for terminal */
+@keyframes border-rotate {
+  0% { --border-angle: 0deg; }
+  100% { --border-angle: 360deg; }
+}
+
+@property --border-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+/* Shimmer text — light sweep across "We Catch What" */
+@keyframes text-shimmer {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+.text-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(247,248,248,0.85) 0%,
+    rgba(247,248,248,0.85) 35%,
+    rgba(0,194,168,0.9) 50%,
+    rgba(247,248,248,0.85) 65%,
+    rgba(247,248,248,0.85) 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: text-shimmer 3s linear infinite;
+}
+
+/* Gradient text — white fade */
+.text-gradient-white {
+  background: linear-gradient(180deg, #ffffff 0%, rgba(255,255,255,0.7) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Gradient text — "We Catch What" white to teal */
+.text-gradient-subtle {
+  background: linear-gradient(180deg, #ffffff 0%, #b8f5ea 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Gradient text — "Humans Miss" teal-to-white */
+.text-gradient-teal {
+  background: linear-gradient(135deg, #00C2A8 0%, #e0faf6 45%, #ffffff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: none;
+}
+
+/* SVG ring spin */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes spin-rev {
+  to { transform: rotate(-360deg); }
 }
 
 @media (prefers-reduced-motion: reduce) {

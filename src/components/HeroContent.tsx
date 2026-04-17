@@ -1,118 +1,105 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
-import AuditTerminal from "./AuditTerminal";
-import WaitlistForm from "./WaitlistForm";
+import { useEffect, useState } from "react";
+import PaperDoc from "./PaperDoc";
 
-const stagger = {
-  hidden: {},
-  show: {
-    transition: { staggerChildren: 0.08, delayChildren: 0.1 },
-  },
-};
+const GOOGLE_FORM_URL =
+  "https://docs.google.com/forms/d/e/1FAIpQLSe61_VqYep9KZIqGNQV0FuBMWm6IUJCZI97-EZFBvJV9MP9Xg/viewform";
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 16 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const },
-  },
-};
+function FadeUp({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
+  return (
+    <motion.div
+      className={className}
+      initial={mounted ? { opacity: 0, y: 16 } : false}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay, ease: [0.16, 1, 0.3, 1] }}
+    >
+      {children}
+    </motion.div>
+  );
+}
 
 export default function HeroContent() {
   return (
-    <div className="relative z-10 flex flex-col items-center justify-center h-svh px-4 sm:px-6 pt-14">
-      <motion.div
-        className="flex flex-col items-center text-center"
-        variants={stagger}
-        initial="hidden"
-        animate="show"
-      >
-        {/* Logo */}
-        <motion.div variants={fadeUp}>
-          <Image
-            src="/logo.png"
-            alt="Citral AI"
-            width={810}
-            height={386}
-            priority
-            className="w-[60vw] sm:w-[36vw] md:w-[22rem] lg:w-[26rem] h-auto max-w-[26rem] translate-x-[5%] drop-shadow-[0_0_40px_rgba(0,194,168,0.15)]"
-          />
-        </motion.div>
+    <section className="relative z-[2] min-h-screen grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center max-w-[1380px] mx-auto px-6 sm:px-10 pt-[140px] pb-20 lg:pb-[120px]">
+      {/* LEFT — Text */}
+      <div>
+        {/* Eyebrow */}
+        <FadeUp delay={0}>
+          <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full text-[10.5px] font-mono tracking-[0.2em] uppercase text-[#3ff0d0] bg-[rgba(0,194,168,0.06)] border border-[rgba(0,194,168,0.28)] mb-7">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#3ff0d0] shadow-[0_0_8px_#00C2A8]" />
+            Private Beta · Q2 2026
+          </div>
+        </FadeUp>
 
         {/* Headline */}
-        <motion.h1 variants={fadeUp} className="leading-[1.05] -mt-1">
-          <span className="block text-[clamp(1.2rem,3vw,1.85rem)] font-semibold tracking-[-0.03em] text-[#f7f8f8]">
-            We Catch What
-          </span>
-          <span
-            className="block text-[clamp(1.2rem,3vw,1.85rem)] font-serif italic text-[#f7f8f8]"
-            style={{ textShadow: "0 0 60px rgba(0,194,168,0.12)" }}
-          >
-            Humans Miss
-            <span className="not-italic text-citral-teal period-pulse">.</span>
-          </span>
-        </motion.h1>
+        <FadeUp delay={0.06}>
+          <h1 className="text-[clamp(48px,6.8vw,96px)] leading-[0.95] tracking-[-0.04em] font-medium m-0 mb-7" style={{ fontFeatureSettings: '"ss01"' }}>
+            Compliance auditing{" "}
+            <span className="font-serif italic font-normal text-[#3ff0d0]">
+              engineered.
+            </span>
+          </h1>
+        </FadeUp>
 
-        {/* Waitlist CTA */}
-        <motion.div variants={fadeUp} className="mt-4" id="waitlist">
-          <WaitlistForm />
-        </motion.div>
+        {/* Sub */}
+        <FadeUp delay={0.12}>
+          <p className="max-w-[540px] text-[16.5px] leading-[1.6] text-[#8aa69d] mb-9">
+            Citral reviews batch records, validation protocols, and deviation reports end-to-end — surfacing every missed signature, expired calibration, and out-of-spec value with{" "}
+            <strong className="text-[#eafff8] font-medium">a verified citation to the source line</strong>.
+            {" "}Purpose-built for regulated pharmaceutical manufacturing.
+          </p>
+        </FadeUp>
 
-        {/* Terminal — compact */}
-        <motion.div variants={fadeUp} className="w-full">
-          <AuditTerminal />
-        </motion.div>
-      </motion.div>
+        {/* Actions */}
+        <FadeUp delay={0.18}>
+          <div className="flex gap-3.5 flex-wrap items-center">
+            {/* Primary CTA */}
+            <a
+              href={GOOGLE_FORM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative inline-flex items-center gap-2.5 px-7 py-[15px] text-[14px] font-semibold rounded-xl text-[#001814] overflow-hidden transition-all duration-200 hover:-translate-y-px"
+              style={{
+                background: "linear-gradient(180deg, #3ff0d0 0%, #00C2A8 100%)",
+                border: "1px solid rgba(255,255,255,0.15)",
+                boxShadow: "0 12px 40px -10px rgba(0,194,168,0.6), inset 0 1px 0 rgba(255,255,255,0.4)",
+              }}
+            >
+              <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent translate-x-[-120%] group-hover:translate-x-[120%] transition-transform duration-700" />
+              <span className="relative">Join Waitlist</span>
+              <svg className="relative" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg>
+            </a>
 
-      {/* Footer */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.4 }}
-        className="absolute bottom-3 flex items-center gap-3"
-      >
-        <span className="text-[10px] text-white/[0.08] font-mono tracking-wide">
-          &copy; 2026 Citral AI
-        </span>
-        <a
-          href="https://instagram.com/citral.ai"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Instagram"
-          className="text-white/20 hover:text-citral-teal/60 transition-colors duration-200"
-        >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-            <rect x="2" y="2" width="20" height="20" rx="5" />
-            <circle cx="12" cy="12" r="5" />
-            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
-          </svg>
-        </a>
-        <a
-          href="https://linkedin.com/company/citral-ai"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="LinkedIn"
-          className="text-white/20 hover:text-citral-teal/60 transition-colors duration-200"
-        >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-          </svg>
-        </a>
-        <a
-          href="https://twitter.com/citralai"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Twitter / X"
-          className="text-white/20 hover:text-citral-teal/60 transition-colors duration-200"
-        >
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-          </svg>
-        </a>
-      </motion.div>
-    </div>
+            {/* Ghost button */}
+            <button
+              className="inline-flex items-center gap-2.5 px-[22px] py-[15px] text-[14px] font-medium rounded-xl text-[#eafff8] border border-[rgba(0,194,168,0.28)] bg-transparent hover:bg-[rgba(0,194,168,0.06)] hover:border-citral-teal transition-all duration-200"
+              onClick={() => {
+                const el = document.querySelector('[data-open-modal]');
+                if (el) (el as HTMLElement).click();
+              }}
+            >
+              <span className="w-[22px] h-[22px] rounded-full bg-[rgba(0,194,168,0.15)] grid place-items-center text-[#3ff0d0]">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z" /></svg>
+              </span>
+              Request a demo
+            </button>
+          </div>
+        </FadeUp>
+      </div>
+
+      {/* RIGHT — Paper document */}
+      <FadeUp delay={0.3} className="w-full lg:w-auto">
+        <div className="lg:transform-none transform scale-[0.82] sm:scale-90 lg:scale-100 origin-top">
+          <PaperDoc />
+        </div>
+      </FadeUp>
+    </section>
   );
 }
