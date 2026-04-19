@@ -49,8 +49,8 @@ export default function BeforeAfter({ accent = "#84cc16" }: { accent?: string })
   return (
     <section
       id="compare"
-      className="relative z-[5] mx-auto"
-      style={{ padding: "140px 32px", maxWidth: 1400 }}
+      className="relative z-[5] mx-auto px-5 sm:px-8"
+      style={{ padding: "clamp(80px, 12vw, 140px) 0", maxWidth: 1400 }}
     >
       <div className="text-center" style={{ marginBottom: 80 }}>
         <div
@@ -82,12 +82,12 @@ export default function BeforeAfter({ accent = "#84cc16" }: { accent?: string })
         </h2>
       </div>
 
-      <div className="ba-grid grid gap-6" style={{ gridTemplateColumns: "1fr 1fr" }}>
+      <div className="ba-grid grid" style={{ gridTemplateColumns: "1fr 1fr", gap: "clamp(16px, 3vw, 24px)" }}>
         {/* BEFORE */}
         <div
-          className="relative"
+          className="relative overflow-hidden"
           style={{
-            padding: 40,
+            padding: "clamp(20px, 4vw, 40px)",
             borderRadius: 20,
             minHeight: 480,
             background: "linear-gradient(145deg, rgba(239,68,68,0.05), rgba(0,0,0,0.5))",
@@ -121,10 +121,10 @@ export default function BeforeAfter({ accent = "#84cc16" }: { accent?: string })
             Manual review
           </div>
 
-          <div className="relative" style={{ height: 280 }}>
-            <PaperPage rotate={-4} top={10} left={20} />
-            <PaperPage rotate={3} top={30} left={120} />
-            <PaperPage rotate={-2} top={55} left={220} />
+          <div className="relative paper-chaos" style={{ height: 280 }}>
+            <PaperPage rotate={-4} top={10} left={0} />
+            <PaperPage rotate={3} top={30} left={90} />
+            <PaperPage rotate={-2} top={55} left={180} />
             <svg className="absolute inset-0 pointer-events-none">
               <path
                 d="M 40 180 Q 120 160 200 200 T 350 180"
@@ -197,7 +197,7 @@ export default function BeforeAfter({ accent = "#84cc16" }: { accent?: string })
         <div
           className="relative"
           style={{
-            padding: 40,
+            padding: "clamp(20px, 4vw, 40px)",
             borderRadius: 20,
             minHeight: 480,
             background: `linear-gradient(145deg, ${accent}15, rgba(0,0,0,0.5))`,
@@ -348,7 +348,14 @@ export default function BeforeAfter({ accent = "#84cc16" }: { accent?: string })
         </div>
       </div>
 
-      <style>{`@media (max-width: 900px){ .ba-grid { grid-template-columns: 1fr !important; } }`}</style>
+      <style>{`
+        @media (max-width: 900px){
+          .ba-grid { grid-template-columns: 1fr !important; }
+        }
+        @media (max-width: 480px){
+          .paper-chaos { transform: scale(0.82); transform-origin: top left; }
+        }
+      `}</style>
     </section>
   );
 }

@@ -9,12 +9,10 @@ function TextRail({
   text,
   accent,
   reverse = false,
-  size = 80,
 }: {
   text: string;
   accent: string;
   reverse?: boolean;
-  size?: number;
 }) {
   const repeated = Array(6).fill(text);
   return (
@@ -26,15 +24,16 @@ function TextRail({
         borderBottom: `1px solid ${accent}22`,
         background: "rgba(0,0,0,0.3)",
         backdropFilter: "blur(6px)",
+        WebkitBackdropFilter: "blur(6px)",
       }}
     >
       <div
         className="inline-flex"
         style={{
-          gap: 40,
+          gap: "clamp(20px, 3vw, 40px)",
           animation: `rail-scroll 40s linear infinite${reverse ? " reverse" : ""}`,
           fontFamily: '"Instrument Serif",serif',
-          fontSize: size,
+          fontSize: "clamp(40px, 8.5vw, 100px)",
           fontStyle: "italic",
           fontWeight: 400,
           lineHeight: 1,
@@ -60,42 +59,53 @@ function TextRail({
 function LiveStats({ accent }: { accent: string }) {
   const STATS = [
     { k: "99.4%", l: "Citation accuracy" },
-    { k: "2.3m", l: "Avg. per BMR" },
-    { k: "15", l: "Frameworks" },
-    { k: "0", l: "Missed findings" },
+    { k: "~3m", l: "Avg. per BMR" },
+    { k: "5+", l: "Frameworks" },
+    { k: "< 1%", l: "Miss rate" },
   ];
   return (
-    <div
-      className="grid grid-cols-2 sm:grid-cols-4 gap-6"
-      style={{ maxWidth: 560 }}
-    >
-      {STATS.map((s) => (
-        <div key={s.l} style={{ borderLeft: `1px solid ${accent}30`, paddingLeft: 14 }}>
-          <div
-            style={{
-              fontFamily: "Geist",
-              fontSize: 28,
-              fontWeight: 500,
-              color: "#fff",
-              letterSpacing: "-0.02em",
-            }}
-          >
-            {s.k}
+    <div className="w-full" style={{ maxWidth: 560 }}>
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-5 sm:gap-6">
+        {STATS.map((s) => (
+          <div key={s.l} style={{ borderLeft: `1px solid ${accent}30`, paddingLeft: 14 }}>
+            <div
+              style={{
+                fontFamily: "Geist",
+                fontSize: "clamp(22px, 3vw, 28px)",
+                fontWeight: 500,
+                color: "#fff",
+                letterSpacing: "-0.02em",
+              }}
+            >
+              {s.k}
+            </div>
+            <div
+              style={{
+                fontFamily: '"Geist Mono",monospace',
+                fontSize: 10,
+                color: `${accent}cc`,
+                textTransform: "uppercase",
+                letterSpacing: "0.12em",
+                marginTop: 4,
+              }}
+            >
+              {s.l}
+            </div>
           </div>
-          <div
-            style={{
-              fontFamily: '"Geist Mono",monospace',
-              fontSize: 10,
-              color: `${accent}cc`,
-              textTransform: "uppercase",
-              letterSpacing: "0.12em",
-              marginTop: 4,
-            }}
-          >
-            {s.l}
-          </div>
-        </div>
-      ))}
+        ))}
+      </div>
+      <div
+        className="mt-4"
+        style={{
+          fontFamily: '"Geist Mono",monospace',
+          fontSize: 9.5,
+          color: "rgba(255,255,255,0.35)",
+          letterSpacing: "0.1em",
+          textTransform: "uppercase",
+        }}
+      >
+        * Simulated benchmark &middot; private beta
+      </div>
     </div>
   );
 }
@@ -105,10 +115,10 @@ export default function CrazyHero({ accent = "#84cc16" }: { accent?: string }) {
     <section
       id="top"
       className="relative z-[5]"
-      style={{ minHeight: "110vh", paddingTop: 140, paddingBottom: 60 }}
+      style={{ minHeight: "100vh", paddingTop: "clamp(100px, 14vh, 160px)", paddingBottom: 60 }}
     >
       {/* Eyebrow */}
-      <div className="mx-auto px-8" style={{ maxWidth: 1400 }}>
+      <div className="mx-auto px-5 sm:px-8" style={{ maxWidth: 1400 }}>
         <div
           className="inline-flex items-center gap-2.5"
           style={{
@@ -138,7 +148,7 @@ export default function CrazyHero({ accent = "#84cc16" }: { accent?: string }) {
       </div>
 
       {/* Headline */}
-      <div className="mx-auto px-8" style={{ maxWidth: 1400, marginBottom: 40 }}>
+      <div className="mx-auto px-5 sm:px-8" style={{ maxWidth: 1400, marginBottom: 40 }}>
         <h1
           className="m-0"
           style={{
@@ -183,17 +193,17 @@ export default function CrazyHero({ accent = "#84cc16" }: { accent?: string }) {
       </div>
 
       {/* Full-bleed outlined italic rail */}
-      <TextRail text="BMR · audit · deviation · batch · ALCOA+ · " accent={accent} size={80} />
+      <TextRail text="BMR · audit · deviation · batch · ALCOA+ · " accent={accent} />
 
       {/* Grid: desc/stats + paper */}
       <div
-        className="hero-main mx-auto px-8"
+        className="hero-main mx-auto px-5 sm:px-8"
         style={{
           maxWidth: 1400,
-          marginTop: 60,
+          marginTop: "clamp(40px, 6vw, 60px)",
           display: "grid",
           gridTemplateColumns: "1fr 520px",
-          gap: 60,
+          gap: "clamp(32px, 5vw, 60px)",
           alignItems: "center",
         }}
       >
@@ -311,15 +321,15 @@ export default function CrazyHero({ accent = "#84cc16" }: { accent?: string }) {
                   <path d="M8 5v14l11-7z" />
                 </svg>
               </span>
-              <span className="relative">Watch Demo</span>
+              <span className="relative">Request a Demo</span>
             </button>
           </div>
 
           <LiveStats accent={accent} />
         </div>
 
-        <div className="flex justify-center">
-          <div style={{ transform: "scale(0.95)" }}>
+        <div className="paper-wrap flex justify-center overflow-hidden">
+          <div className="paper-scale">
             <PaperDoc />
           </div>
         </div>
@@ -328,6 +338,20 @@ export default function CrazyHero({ accent = "#84cc16" }: { accent?: string }) {
       <style>{`
         @media (max-width: 1100px) {
           .hero-main { grid-template-columns: 1fr !important; }
+        }
+        .paper-scale {
+          transform: scale(0.95);
+          transform-origin: top center;
+        }
+        @media (max-width: 900px) {
+          .paper-scale { transform: scale(0.82); }
+        }
+        @media (max-width: 640px) {
+          .paper-scale { transform: scale(0.66); }
+          .paper-wrap { padding: 40px 0; }
+        }
+        @media (max-width: 420px) {
+          .paper-scale { transform: scale(0.54); }
         }
       `}</style>
     </section>

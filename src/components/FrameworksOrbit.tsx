@@ -15,12 +15,12 @@ export default function FrameworksOrbit({ accent = "#84cc16" }: { accent?: strin
   return (
     <section
       id="frameworks"
-      className="relative z-[5] mx-auto"
-      style={{ padding: "140px 32px", maxWidth: 1400 }}
+      className="relative z-[5] mx-auto px-5 sm:px-8"
+      style={{ padding: "clamp(80px, 12vw, 140px) 0", maxWidth: 1400 }}
     >
       <div
-        className="fw-grid grid gap-12 items-center"
-        style={{ gridTemplateColumns: "1fr 1fr" }}
+        className="fw-grid grid items-center"
+        style={{ gridTemplateColumns: "1fr 1fr", gap: "clamp(32px, 5vw, 48px)" }}
       >
         <div>
           <div
@@ -112,7 +112,7 @@ export default function FrameworksOrbit({ accent = "#84cc16" }: { accent?: strin
         {/* Orbit */}
         <div
           className="relative mx-auto w-full"
-          style={{ aspectRatio: "1/1", maxWidth: 540 }}
+          style={{ aspectRatio: "1/1", maxWidth: "min(540px, 90vw)" }}
         >
           {/* Radial glow behind everything */}
           <div
@@ -198,8 +198,8 @@ export default function FrameworksOrbit({ accent = "#84cc16" }: { accent?: strin
             className="absolute top-1/2 left-1/2 flex flex-col items-center justify-center text-center overflow-hidden"
             style={{
               transform: "translate(-50%, -50%)",
-              width: 168,
-              height: 168,
+              width: "clamp(132px, 32%, 168px)",
+              height: "clamp(132px, 32%, 168px)",
               borderRadius: "50%",
               background: `
                 radial-gradient(circle at 30% 28%, ${accent}50 0%, transparent 60%),

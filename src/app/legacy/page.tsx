@@ -1,8 +1,16 @@
+import type { Metadata } from "next";
 import HeroContent from "@/components/legacy/HeroContent";
 import Navbar from "@/components/legacy/Navbar";
 import MeshBackground from "@/components/legacy/MeshBackground";
 import Spotlight from "@/components/legacy/Spotlight";
 import FloatingFragments from "@/components/legacy/FloatingFragments";
+
+export const metadata: Metadata = {
+  title: "Citral AI · Legacy preview",
+  description: "Archived v1 design of citral.ai. Not indexed.",
+  robots: { index: false, follow: false, nocache: true },
+  alternates: { canonical: undefined },
+};
 
 export default function LegacyHome() {
   return (

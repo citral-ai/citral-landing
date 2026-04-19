@@ -7,8 +7,8 @@ export default function FinalCTA({ accent = "#84cc16" }: { accent?: string }) {
   return (
     <section
       id="cta"
-      className="relative z-[5] mx-auto text-center"
-      style={{ padding: "160px 32px 100px", maxWidth: 1400 }}
+      className="relative z-[5] mx-auto text-center px-5 sm:px-8"
+      style={{ padding: "clamp(90px, 14vw, 160px) 0 clamp(60px, 10vw, 100px)", maxWidth: 1400 }}
     >
       <div
         style={{

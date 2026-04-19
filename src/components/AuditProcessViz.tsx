@@ -38,8 +38,8 @@ export default function AuditProcessViz({ accent = "#84cc16" }: { accent?: strin
     <section
       id="process"
       ref={rootRef}
-      className="relative z-[5] mx-auto"
-      style={{ padding: "140px 32px", maxWidth: 1400 }}
+      className="relative z-[5] mx-auto px-5 sm:px-8"
+      style={{ padding: "clamp(80px, 12vw, 140px) 0", maxWidth: 1400 }}
     >
       <div style={{ marginBottom: 60 }}>
         <div
@@ -85,7 +85,7 @@ export default function AuditProcessViz({ accent = "#84cc16" }: { accent?: strin
       <div
         className="relative overflow-hidden"
         style={{
-          minHeight: 560,
+          minHeight: 420,
           background: "rgba(0,0,0,0.4)",
           backdropFilter: "blur(14px)",
           WebkitBackdropFilter: "blur(14px)",
@@ -103,13 +103,10 @@ export default function AuditProcessViz({ accent = "#84cc16" }: { accent?: strin
           }}
         />
 
+        {/* Stages — desktop grid, mobile horizontal snap-scroll */}
         <div
-          className="relative z-[5] grid"
-          style={{
-            padding: "40px 60px",
-            gridTemplateColumns: "repeat(4, 1fr)",
-            gap: 30,
-          }}
+          className="relative z-[5] stage-grid"
+          style={{ padding: "clamp(24px, 4vw, 40px) clamp(20px, 4vw, 60px)" }}
         >
           {STAGES.map((s, i) => {
             const isActive = active === i;
@@ -117,6 +114,7 @@ export default function AuditProcessViz({ accent = "#84cc16" }: { accent?: strin
             return (
               <div
                 key={s.n}
+                className="stage-card"
                 style={{
                   padding: 24,
                   borderRadius: 12,
@@ -175,8 +173,8 @@ export default function AuditProcessViz({ accent = "#84cc16" }: { accent?: strin
           })}
         </div>
 
-        <div className="relative" style={{ height: 260, padding: "0 60px" }}>
-          <svg width="100%" height="100%" viewBox="0 0 1280 260" preserveAspectRatio="none">
+        <div className="pipeline-wrap relative" style={{ height: 260, padding: "0 clamp(20px, 4vw, 60px)" }}>
+          <svg className="w-full h-full" viewBox="0 0 1280 260" preserveAspectRatio="xMidYMid meet">
             <defs>
               <linearGradient id="pipe-grad" x1="0" x2="1">
                 <stop offset="0" stopColor={accent} stopOpacity="0.3" />
@@ -239,6 +237,7 @@ export default function AuditProcessViz({ accent = "#84cc16" }: { accent?: strin
           {FRAGMENTS.map((txt, i) => (
             <span
               key={txt}
+              className="hidden sm:inline-block"
               style={{
                 position: "absolute",
                 left: `${8 + i * 15}%`,
@@ -256,6 +255,35 @@ export default function AuditProcessViz({ accent = "#84cc16" }: { accent?: strin
           ))}
         </div>
       </div>
+
+      <style>{`
+        .stage-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 30px;
+        }
+        @media (max-width: 900px) {
+          .stage-grid {
+            display: flex;
+            grid-template-columns: none;
+            gap: 14px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            padding-bottom: 12px;
+          }
+          .stage-grid::-webkit-scrollbar { display: none; }
+          .stage-card {
+            flex: 0 0 75%;
+            max-width: 280px;
+            scroll-snap-align: start;
+          }
+        }
+        @media (max-width: 640px) {
+          .pipeline-wrap { display: none; }
+        }
+      `}</style>
     </section>
   );
 }

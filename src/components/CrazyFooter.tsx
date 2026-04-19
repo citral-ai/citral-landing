@@ -10,9 +10,9 @@ const SOCIALS = [
 export default function CrazyFooter({ accent = "#84cc16" }: { accent?: string }) {
   return (
     <footer
-      className="relative z-[5] mx-auto"
+      className="relative z-[5] mx-auto px-5 sm:px-8"
       style={{
-        padding: "60px 32px 40px",
+        padding: "60px 0 40px",
         maxWidth: 1400,
         borderTop: `1px solid ${accent}15`,
       }}
