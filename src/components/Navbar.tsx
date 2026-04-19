@@ -29,7 +29,7 @@ export default function Navbar() {
       >
         {/* Left: logo + tag */}
         <div className="flex items-center gap-4">
-          <Image src="/icon-only.png" alt="Citral AI" width={210} height={286} className="h-[22px] w-auto" />
+          <Image src="/logo.png" alt="Citral" width={1993} height={882} priority className="h-[22px] w-auto" />
           <span className="hidden md:block pl-3.5 border-l border-[rgba(0,194,168,0.12)] font-mono text-[10px] tracking-[0.16em] uppercase text-[#4f6963]">
             Pharma Compliance AI
           </span>

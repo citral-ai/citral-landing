@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Instrument_Serif, Caveat, Courier_Prime } from "next/font/google";
 import "./globals.css";
 
@@ -46,9 +46,12 @@ const jsonLd = {
   ],
 };
 
+export const viewport: Viewport = {
+  themeColor: "#020a08",
+};
+
 export const metadata: Metadata = {
   title: "Citral AI — We Catch What Humans Miss",
-  themeColor: "#020a08",
   description:
     "AI-powered compliance auditing for pharmaceutical batch manufacturing records. Automated checking against FDA, EU GMP, PICS, WHO, and India Schedule M.",
   alternates: {

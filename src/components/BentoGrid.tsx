@@ -190,7 +190,7 @@ export default function BentoGrid() {
               15 frameworks, one audit
             </h3>
             <div className="flex flex-wrap gap-2">
-              {FRAMEWORKS.map((fw, i) => (
+              {FRAMEWORKS.map((fw) => (
                 <span
                   key={fw}
                   className="inline-flex items-center px-2.5 py-1 rounded-full font-mono"

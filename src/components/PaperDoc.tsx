@@ -154,12 +154,12 @@ const ReviewItem = ({
   severity,
   color,
   text,
-  ref: refText,
+  cite: refText,
 }: {
   severity: string;
   color: string;
   text: string;
-  ref: string;
+  cite: string;
 }) => (
   <div className="flex gap-2 items-start">
     <span
@@ -206,19 +206,19 @@ const AIReviewCard = () => (
           severity="Critical"
           color="#EF4444"
           text="Calibration expired \u00b7 Balance ID-2847"
-          ref="\u00a75.1.2 \u00b7 pg. 28 \u00b7 21 CFR \u00a7211.68(a)"
+          cite="\u00a75.1.2 \u00b7 pg. 28 \u00b7 21 CFR \u00a7211.68(a)"
         />
         <ReviewItem
           severity="Warning"
           color="#E8C84A"
           text="Yield 94.2% below 95% spec"
-          ref="\u00a73.2.4 \u00b7 pg. 12 \u00b7 SOP-QA-0042"
+          cite="\u00a73.2.4 \u00b7 pg. 12 \u00b7 SOP-QA-0042"
         />
         <ReviewItem
           severity="Warning"
           color="#E8C84A"
           text="Missing supervisor signature"
-          ref="\u00a74.3 \u00b7 SOP-MFG-0101"
+          cite="\u00a74.3 \u00b7 SOP-MFG-0101"
         />
       </div>
     </div>
