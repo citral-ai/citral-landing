@@ -153,14 +153,16 @@ export default function CrazyHero({ accent = "#84cc16" }: { accent?: string }) {
           className="m-0"
           style={{
             fontFamily: "Geist",
-            fontSize: "clamp(56px, 9vw, 160px)",
+            fontSize: "clamp(52px, 9vw, 148px)",
             fontWeight: 500,
-            lineHeight: 0.88,
+            lineHeight: 0.92,
             letterSpacing: "-0.045em",
             color: "#fff",
           }}
         >
-          We catch what
+          Compliance
+          <br />
+          auditing
           <br />
           <span
             style={{
@@ -173,22 +175,8 @@ export default function CrazyHero({ accent = "#84cc16" }: { accent?: string }) {
               backgroundClip: "text",
             }}
           >
-            humans miss
+            engineered.
           </span>
-          <span
-            aria-hidden="true"
-            style={{
-              display: "inline-block",
-              width: "clamp(14px, 1.6vw, 28px)",
-              height: "clamp(14px, 1.6vw, 28px)",
-              background: accent,
-              borderRadius: 3,
-              marginLeft: 12,
-              marginBottom: "0.1em",
-              verticalAlign: "baseline",
-              boxShadow: `0 0 24px ${accent}`,
-            }}
-          />
         </h1>
       </div>
 
