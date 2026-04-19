@@ -232,6 +232,11 @@ body {
 @keyframes cta-shimmer {
   to { background-position: 200% center; }
 }
+@keyframes scan-pulse {
+  0% { opacity: 0.9; transform: scale(1); }
+  70% { opacity: 0; transform: scale(1.18); }
+  100% { opacity: 0; transform: scale(1.22); }
+}
 
 /* Scan beam — used by legacy AuditTerminal (/legacy route) */
 @keyframes scan-beam {

@@ -114,11 +114,30 @@ export default function FrameworksOrbit({ accent = "#84cc16" }: { accent?: strin
           className="relative mx-auto w-full"
           style={{ aspectRatio: "1/1", maxWidth: 540 }}
         >
+          {/* Radial glow behind everything */}
+          <div
+            className="absolute pointer-events-none"
+            style={{
+              inset: "20%",
+              borderRadius: "50%",
+              background: `radial-gradient(circle, ${accent}18 0%, ${accent}08 40%, transparent 70%)`,
+              filter: "blur(20px)",
+            }}
+          />
+
+          {/* Concentric guideline rings — 5 total, varying weight */}
           <div
             className="absolute inset-0 rounded-full"
             style={{
               border: `1px dashed ${accent}30`,
               animation: "orb-spin 60s linear infinite",
+            }}
+          />
+          <div
+            className="absolute rounded-full"
+            style={{
+              inset: "7%",
+              border: `1px solid ${accent}15`,
             }}
           />
           <div
@@ -132,56 +151,161 @@ export default function FrameworksOrbit({ accent = "#84cc16" }: { accent?: strin
           <div
             className="absolute rounded-full"
             style={{
+              inset: "19%",
+              border: `1px dotted ${accent}28`,
+            }}
+          />
+          <div
+            className="absolute rounded-full"
+            style={{
               inset: "25%",
               border: `1px solid ${accent}20`,
               animation: "orb-spin 80s linear infinite",
             }}
           />
-          {/* Center */}
+
+          {/* Crosshair axes — subtle guidelines through center */}
           <div
-            className="absolute top-1/2 left-1/2 grid place-items-center text-center"
+            className="absolute top-1/2 left-0 right-0 pointer-events-none"
+            style={{
+              height: 1,
+              background: `linear-gradient(90deg, transparent 0%, ${accent}12 20%, ${accent}20 50%, ${accent}12 80%, transparent 100%)`,
+              transform: "translateY(-50%)",
+            }}
+          />
+          <div
+            className="absolute left-1/2 top-0 bottom-0 pointer-events-none"
+            style={{
+              width: 1,
+              background: `linear-gradient(180deg, transparent 0%, ${accent}12 20%, ${accent}20 50%, ${accent}12 80%, transparent 100%)`,
+              transform: "translateX(-50%)",
+            }}
+          />
+
+          {/* Outer pulsing scan ring */}
+          <div
+            className="absolute rounded-full pointer-events-none"
+            style={{
+              inset: "8%",
+              border: `1.5px solid ${accent}`,
+              opacity: 0,
+              animation: "scan-pulse 3.6s ease-out infinite",
+            }}
+          />
+
+          {/* Center — richer BMR node */}
+          <div
+            className="absolute top-1/2 left-1/2 flex flex-col items-center justify-center text-center overflow-hidden"
             style={{
               transform: "translate(-50%, -50%)",
-              width: 130,
-              height: 130,
+              width: 168,
+              height: 168,
               borderRadius: "50%",
-              background: `radial-gradient(circle, ${accent}35, ${accent}05)`,
+              background: `
+                radial-gradient(circle at 30% 28%, ${accent}50 0%, transparent 60%),
+                radial-gradient(circle at 70% 75%, ${accent}25 0%, transparent 55%),
+                linear-gradient(145deg, rgba(10,15,0,0.96), rgba(5,20,5,0.9))
+              `,
               border: `1px solid ${accent}60`,
-              boxShadow: `0 0 60px ${accent}40`,
+              boxShadow: `0 0 80px ${accent}35, inset 0 1px 0 ${accent}35, inset 0 -16px 32px rgba(0,0,0,0.5)`,
             }}
           >
-            <div>
-              <div
+            {/* Inner scan-lines */}
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                opacity: 0.15,
+                backgroundImage:
+                  "repeating-linear-gradient(0deg, transparent 0 2px, rgba(255,255,255,0.4) 2px 3px)",
+              }}
+            />
+            {/* Soft moving sheen */}
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background: `conic-gradient(from 0deg, transparent 0deg, ${accent}20 45deg, transparent 90deg, transparent 360deg)`,
+                animation: "orb-spin 10s linear infinite",
+                mixBlendMode: "screen",
+              }}
+            />
+
+            {/* Status pill */}
+            <div
+              className="relative inline-flex items-center gap-1.5 mb-2"
+              style={{
+                padding: "3px 9px",
+                borderRadius: 99,
+                background: `${accent}18`,
+                border: `1px solid ${accent}55`,
+              }}
+            >
+              <span
+                style={{
+                  width: 5,
+                  height: 5,
+                  borderRadius: 99,
+                  background: accent,
+                  boxShadow: `0 0 8px ${accent}`,
+                  animation: "dot-pulse 1.2s infinite",
+                }}
+              />
+              <span
                 style={{
                   fontFamily: '"Geist Mono",monospace',
-                  fontSize: 10,
-                  color: accent,
+                  fontSize: 8.5,
+                  fontWeight: 700,
                   letterSpacing: "0.2em",
+                  color: accent,
+                  textTransform: "uppercase",
                 }}
               >
-                CITRAL
-              </div>
-              <div
-                style={{
-                  fontFamily: "Geist",
-                  fontSize: 22,
-                  fontWeight: 600,
-                  color: "#fff",
-                  marginTop: 4,
-                }}
-              >
-                BMR
-              </div>
-              <div
-                style={{
-                  fontFamily: '"Geist Mono",monospace',
-                  fontSize: 9,
-                  color: "rgba(255,255,255,0.5)",
-                  marginTop: 2,
-                }}
-              >
-                0847
-              </div>
+                Live · Auditing
+              </span>
+            </div>
+
+            {/* Label */}
+            <div
+              className="relative"
+              style={{
+                fontFamily: '"Geist Mono",monospace',
+                fontSize: 9,
+                color: "rgba(255,255,255,0.55)",
+                letterSpacing: "0.24em",
+                textTransform: "uppercase",
+              }}
+            >
+              Batch Record
+            </div>
+
+            {/* BMR ID */}
+            <div
+              className="relative"
+              style={{
+                fontFamily: "Geist",
+                fontSize: 28,
+                fontWeight: 600,
+                color: "#fff",
+                letterSpacing: "-0.02em",
+                lineHeight: 1,
+                marginTop: 4,
+              }}
+            >
+              BMR-0847
+            </div>
+
+            {/* Meta */}
+            <div
+              className="relative flex items-center gap-2 mt-2"
+              style={{
+                fontFamily: '"Geist Mono",monospace',
+                fontSize: 9,
+                color: "rgba(255,255,255,0.45)",
+                letterSpacing: "0.1em",
+              }}
+            >
+              <span>8 FRAMEWORKS</span>
+              <span style={{ color: `${accent}80` }}>·</span>
+              <span>2m 18s</span>
             </div>
           </div>
 

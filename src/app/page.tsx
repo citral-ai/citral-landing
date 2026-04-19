@@ -8,7 +8,7 @@ import BeforeAfter from "@/components/BeforeAfter";
 import FinalCTA from "@/components/FinalCTA";
 import CrazyFooter from "@/components/CrazyFooter";
 
-const ACCENT = "#84cc16";
+const ACCENT = "#a3e635";
 
 export default function Home() {
   return (

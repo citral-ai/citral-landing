@@ -70,42 +70,99 @@ export default function FinalCTA({ accent = "#84cc16" }: { accent?: string }) {
           href={BETA_FORM_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-3 transition-transform hover:-translate-y-px"
+          className="group relative inline-flex items-center gap-3 overflow-hidden transition-transform duration-300 hover:-translate-y-0.5"
           style={{
-            padding: "20px 44px",
+            padding: "20px 44px 20px 30px",
             fontSize: 16,
             fontWeight: 700,
             fontFamily: "Geist",
-            color: "#000",
-            background: accent,
-            border: "none",
+            color: "#0a0f00",
+            background: `linear-gradient(180deg, #d9f99d 0%, ${accent} 55%, #84cc16 100%)`,
+            border: "1px solid rgba(255,255,255,0.22)",
             borderRadius: 99,
             cursor: "pointer",
-            boxShadow: `0 20px 60px -12px ${accent}, inset 0 1px 0 rgba(255,255,255,0.4)`,
+            boxShadow: `0 22px 70px -14px ${accent}cc, inset 0 1px 0 rgba(255,255,255,0.55), inset 0 -1px 0 rgba(0,0,0,0.15)`,
             textDecoration: "none",
+            letterSpacing: "-0.01em",
           }}
         >
-          ⚡ Get Beta Access →
+          <span
+            className="absolute inset-0 pointer-events-none -translate-x-full group-hover:translate-x-full transition-transform duration-700"
+            style={{
+              background:
+                "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.6) 50%, transparent 100%)",
+            }}
+          />
+          <span
+            className="relative inline-flex items-center justify-center shrink-0"
+            style={{
+              width: 30,
+              height: 30,
+              borderRadius: 99,
+              background: "rgba(0,0,0,0.18)",
+              boxShadow: "inset 0 1px 0 rgba(255,255,255,0.35)",
+            }}
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="#0a0f00" aria-hidden="true">
+              <path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z" />
+            </svg>
+          </span>
+          <span className="relative">Get Beta Access</span>
+          <svg
+            className="relative transition-transform duration-300 group-hover:translate-x-1"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            aria-hidden="true"
+          >
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
         </a>
-        <a
-          href="mailto:prateek@citral.ai"
-          className="inline-flex items-center"
+
+        <button
+          onClick={() => {
+            const el = document.querySelector("[data-open-modal]");
+            if (el) (el as HTMLElement).click();
+          }}
+          className="group relative inline-flex items-center gap-3 transition-all duration-300 hover:-translate-y-0.5"
           style={{
-            padding: "20px 36px",
+            padding: "20px 36px 20px 24px",
             fontSize: 15,
             fontWeight: 500,
             fontFamily: "Geist",
-            color: "#fff",
-            background: "rgba(255,255,255,0.04)",
+            color: "#f5f5f0",
+            background:
+              "linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01))",
             backdropFilter: "blur(20px)",
             WebkitBackdropFilter: "blur(20px)",
-            border: `1px solid ${accent}30`,
+            border: `1px solid ${accent}38`,
             borderRadius: 99,
-            textDecoration: "none",
+            cursor: "pointer",
+            letterSpacing: "-0.01em",
+            boxShadow: "inset 0 1px 0 rgba(255,255,255,0.04)",
           }}
         >
-          prateek@citral.ai
-        </a>
+          <span
+            className="relative inline-flex items-center justify-center shrink-0"
+            style={{
+              width: 28,
+              height: 28,
+              borderRadius: 99,
+              background: `${accent}1e`,
+              border: `1px solid ${accent}55`,
+            }}
+          >
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={accent} strokeWidth="2" aria-hidden="true">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+              <path d="m22 6-10 7L2 6" />
+            </svg>
+          </span>
+          <span>Talk to Sales</span>
+        </button>
       </div>
     </section>
   );
