@@ -134,26 +134,6 @@ export default function ContactModal({ open, onClose }: Props) {
     }
   }, [step, open, current.type]);
 
-  // Escape to close, Enter to advance
-  useEffect(() => {
-    if (!open) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        if (countryOpen) {
-          setCountryOpen(false);
-        } else {
-          handleClose();
-        }
-      }
-      if (e.key === "Enter" && current.type !== "textarea" && current.type !== "done" && current.type !== "select") {
-        e.preventDefault();
-        advance();
-      }
-    };
-    document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey);
-  });
-
   const handleClose = useCallback(() => {
     onClose();
     setTimeout(() => {
@@ -221,6 +201,27 @@ export default function ContactModal({ open, onClose }: Props) {
     setError("");
     setStep((s) => s - 1);
   };
+
+  // Escape to close, Enter to advance
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        if (countryOpen) {
+          setCountryOpen(false);
+        } else {
+          handleClose();
+        }
+      }
+      if (e.key === "Enter" && current.type !== "textarea" && current.type !== "done" && current.type !== "select") {
+        e.preventDefault();
+        advance();
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open, countryOpen, current.type, handleClose]);
 
   return (
     <AnimatePresence>
